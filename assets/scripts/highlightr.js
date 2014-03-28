@@ -179,9 +179,6 @@ var exports = exports || {};
       vi.trigger('setAttributes', {
         code: e.target.value
       });
-      this.config.code = e.target.value;
-      this.render();
-      this.afterRender();
     }.bind(this));
 
     return this;
