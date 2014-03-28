@@ -4,7 +4,7 @@ var exports = exports || {};
   'use strict';
 
   // wrapper for postMessage communication
-  var vi = exports.versalInterface;
+  var vi = new exports.versalInterface();
 
   /**
    * @constructor
@@ -13,6 +13,8 @@ var exports = exports || {};
    */
   var Highlightr = function(options) {
     this.$el = $(options.el);
+    if (options.config)
+      this.config = options.config;
 
     // a toggle-able state for the gadget
     this.editable = false;
@@ -189,7 +191,11 @@ var exports = exports || {};
   exports.Highlightr = Highlightr;
 
   var gadget = new Highlightr({
-    el: document.querySelector('body')
+    el: document.querySelector('body'),
+    config: {
+      code: 'function awesome() {}',
+      theme: 'default'
+    }
   });
 
   gadget.initialize();
