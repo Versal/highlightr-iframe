@@ -1,0 +1,14 @@
+{
+  "username": "ryjo",
+  "name": "highlightr-iframe",
+  "version": "0.0.1",
+  "title": "Highlightr Iframe",
+  "description": "Iframe launcher-compatible syntax highlighter",
+  "author": "Ryan Jones",
+  "defaultConfig": {
+    "__launcher": "iframe",
+    "code": "function awesome() {}",
+    "theme": "default"
+  },
+  "defaultUserState": {}
+}

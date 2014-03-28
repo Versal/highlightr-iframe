@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Highlightr tests</title>
+    <link rel="stylesheet" type="text/css" href="styles/mocha.css">
+  </head>
+  <body>
+    <div id="mocha"></div>
+
+    <!-- mocha -->
+    <script src="lib/mocha.js"></script>
+    <script type="text/javascript">
+      // this will be overridden by mocha-helper if you run with grunt
+      mocha.setup('bdd');
+    </script>
+
+    <!-- include testing lib -->
+    <script src="lib/chai.js"></script>
+    <script type="text/javascript">
+      var expect = chai.expect;
+    </script>
+
+    <!-- include js to be tested -->
+    <script src="lib/jquery-1.11.0.min.js"></script>
+    <script src="lib/jquery.autosize.js"></script>
+    <script src="lib/highlight.pack.js"></script>
+    <script src="lib/behave.js"></script>
+
+    <script src="scripts/post_message_interface.js"></script>
+    <script src="scripts/highlightr.js"></script>
+
+    <!-- spec files -->
+    <script src="specs/highlightr_spec.js"></script>
+
+    <!-- run mocha -->
+    <script type="text/javascript">
+      // only run headless if not in browser
+      if (navigator.userAgent.indexOf('PhantomJS') < 0) {
+        mocha.run();
+      }
+    </script>
+  </body>
+</html>
