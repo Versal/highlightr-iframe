@@ -3,13 +3,22 @@ var exports = exports || {};
 (function() {
   'use strict';
 
+  // wrapper for postMessage communication
   var vi = exports.versalInterface;
 
+  /**
+   * @constructor
+   * Gadget constructor
+   * @param options Used to set container DOM element
+   */
   var Highlightr = function(options) {
     this.$el = $(options.el);
+
+    // a toggle-able state for the gadget
     this.editable = false;
   };
 
+  // auto-size hook for Behave.js editor plugin
   Highlightr.prototype.createBehaveHooks = function() {
     BehaveHooks.add(['keydown'], function(data) {
       var numLines = data.lines.total;
@@ -24,7 +33,6 @@ var exports = exports || {};
     vi.addEventListener(
       'attributesChanged',
       function(data) {
-        console.log(data);
         this.config = data;
         this.render();
         this.afterRender();
@@ -56,6 +64,11 @@ var exports = exports || {};
   };
 
   Highlightr.prototype.initialize = function() {
+    /**
+     * add a bunch of theme options in the property sheet
+     * NOTE: the select will trigger attributeChanged if
+     * a different option is selected
+     */
     vi.trigger('setPropertySheetAttributes', {
       theme: {
         type: 'Select',
@@ -114,6 +127,7 @@ var exports = exports || {};
   };
 
   Highlightr.prototype.render = function() {
+    // this generates the markup from the raw code input
     var code = hljs.highlightAuto(this.config.code).value;
     var $container;
 
@@ -124,6 +138,7 @@ var exports = exports || {};
     $container = this.$el.find('.hljs-container');
     $container.addClass(this.config.theme);
 
+    // show either the code or an editable textarea
     if (this.editable) {
       $container.html('<textarea class="code hljs"></textarea>');
     } else {
@@ -137,6 +152,7 @@ var exports = exports || {};
     return this;
   };
 
+  // Behave.js needs certain elements rendered before it can be initialized
   Highlightr.prototype.afterRender = function() {
     var $textarea = this.$el.find('textarea');
 
@@ -156,6 +172,7 @@ var exports = exports || {};
 
     $textarea.autosize();
 
+    // on blur of textarea, save contents to config
     $textarea.on('blur', function(e) {
       vi.trigger('setAttributes', {
         code: e.target.value
