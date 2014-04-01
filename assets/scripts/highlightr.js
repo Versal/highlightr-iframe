@@ -35,7 +35,10 @@ var exports = exports || {};
     vi.addEventListener(
       'attributesChanged',
       function(data) {
-        this.config = data;
+        for (var key in data) {
+          this.config[key] = data[key];
+        }
+
         this.render();
         this.afterRender();
       }.bind(this)
@@ -130,8 +133,14 @@ var exports = exports || {};
 
   Highlightr.prototype.render = function() {
     // this generates the markup from the raw code input
-    var code = hljs.highlightAuto(this.config.code).value;
+    var code;
     var $container;
+
+    if (this.config.code !== '') {
+      code = hljs.highlightAuto(this.config.code).value;
+    } else {
+      code = '';
+    }
 
     if (!this.$el.find('.hljs-container').length) {
       this.$el.append('<div class="hljs-container"></div>');
