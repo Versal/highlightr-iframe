@@ -144,6 +144,8 @@ var exports = exports || {};
 
     if (!this.$el.find('.hljs-container').length) {
       this.$el.append('<div class="hljs-container"></div>');
+    } else {
+      this.$el.find('.hljs-container')[0].className = "hljs-container";
     }
 
     $container = this.$el.find('.hljs-container');
