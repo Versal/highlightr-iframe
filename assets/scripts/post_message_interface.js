@@ -41,17 +41,6 @@ if (!Function.prototype.bind) {
    */
   var VersalGadgetInterface = function() {
     var receiveMessage;
-    var decodeEvent;
-
-    /**
-     * @private
-     * @returns parsed JSON data
-     */
-    decodeEvent = function(event) {
-      if (typeof(event.data) === 'string') {
-        return JSON.parse(event.data);
-      }
-    };
 
     /**
      * @private
@@ -59,7 +48,7 @@ if (!Function.prototype.bind) {
      * messages and executing handler functions
      */
     receiveMessage = function(event) {
-      var obj = decodeEvent(event);
+      var obj = event.data;
 
       if (this.eventListeners[obj.event]) {
         each.call(this.eventListeners[obj.event], function(listener) {
@@ -80,7 +69,7 @@ if (!Function.prototype.bind) {
         data: data
       };
 
-      window.parent.postMessage(JSON.stringify(obj), '*');
+      window.parent.postMessage(obj, '*');
     };
 
     /**
