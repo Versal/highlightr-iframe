@@ -5,8 +5,8 @@
   "title": "Highlightr Iframe",
   "description": "Iframe launcher-compatible syntax highlighter",
   "author": "Ryan Jones",
+  "launcher": "iframe",
   "defaultConfig": {
-    "__launcher": "iframe"
   },
   "defaultUserState": {}
 }
