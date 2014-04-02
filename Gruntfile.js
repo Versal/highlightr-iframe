@@ -6,14 +6,14 @@ module.exports = function(grunt) {
           use: [ require('nib') ]
         },
         files: {
-          'assets/gadget.css': 'src/styles/**/*.styl'
+          'styles/gadget.css': 'src/styles/**/*.styl'
         }
       }
     },
     
     mocha: {
       test: {
-        src: ['assets/test.html'],
+        src: ['./test.html'],
         options: {
           reporter: 'Spec',
           log: true,
@@ -30,7 +30,7 @@ module.exports = function(grunt) {
       },
 
       tests: {
-        files: ['assets/specs/**/*.js'],
+        files: ['./specs/**/*.js'],
         tasks: ['mocha']
       }
     }
