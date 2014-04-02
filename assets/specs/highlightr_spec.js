@@ -26,18 +26,15 @@
       });
 
       it('should render', function(done) {
-        window.postMessage(
-          JSON.stringify({
-            event: 'attributesChanged',
-            data: {
-              code: 'function() { var whoop; }',
-              theme: 'default'
-              }
-          }),
-          '*'
-        );
+        window.postMessage({
+          event: 'attributesChanged',
+          data: {
+            code: 'function() { var whoop; }',
+            theme: 'default'
+            }
+        }, '*');
 
-        window.postMessage(JSON.stringify({ event: 'attached' }), '*');
+        window.postMessage({ event: 'attached' }, '*');
 
         this.timeout(500);
 
