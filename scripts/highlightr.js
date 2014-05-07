@@ -4,7 +4,7 @@ var exports = exports || {};
   'use strict';
 
   // wrapper for postMessage communication
-  var vi = new exports.versalInterface();
+  var player = new VersalPlayerAPI();
 
   /**
    * @constructor
@@ -32,7 +32,7 @@ var exports = exports || {};
   };
 
   Highlightr.prototype.createListeners = function() {
-    vi.addEventListener(
+    player.on(
       'attributesChanged',
       function(data) {
         for (var key in data) {
@@ -44,7 +44,7 @@ var exports = exports || {};
       }.bind(this)
     );
 
-    vi.addEventListener(
+    player.on(
       'attached',
       function() {
         this.render();
@@ -52,7 +52,7 @@ var exports = exports || {};
       }.bind(this)
     );
 
-    vi.addEventListener(
+    player.on(
       'setEditable',
       function(data) {
         this.editable = data.editable;
@@ -74,7 +74,7 @@ var exports = exports || {};
      * NOTE: the select will trigger attributeChanged if
      * a different option is selected
      */
-    vi.trigger('setPropertySheetAttributes', {
+    player.sendMessage('setPropertySheetAttributes', {
       theme: {
         type: 'Select',
         options: [
@@ -128,7 +128,7 @@ var exports = exports || {};
     this.createListeners();
     this.createBehaveHooks();
 
-    vi.trigger('startListening');
+    player.sendMessage('startListening');
     return this;
   };
 
@@ -154,7 +154,7 @@ var exports = exports || {};
 
     var heightObserver = new MutationObserver(function(mx){
       var height = mx[0].target.offsetHeight;
-      vi.trigger('setHeight', { pixels: height });
+      player.sendMessage('setHeight', { pixels: height });
     });
 
     // show either the code or an editable textarea
@@ -195,7 +195,7 @@ var exports = exports || {};
 
     // on blur of textarea, save contents to config
     $textarea.on('blur', function(e) {
-      vi.trigger('setAttributes', {
+      player.sendMessage('setAttributes', {
         code: e.target.value
       });
     }.bind(this));
