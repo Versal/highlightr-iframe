@@ -121,13 +121,14 @@ var exports = exports || {};
           'vs',
           'xcode',
           'zenburn'
-        ]    
+        ]
       }
     });
 
     this.createListeners();
     this.createBehaveHooks();
 
+    vi.trigger('startListening');
     return this;
   };
 
@@ -151,10 +152,17 @@ var exports = exports || {};
     $container = this.$el.find('.hljs-container');
     $container.addClass(this.config.theme);
 
+    var heightObserver = new MutationObserver(function(mx){
+      var height = mx[0].target.offsetHeight;
+      vi.trigger('setHeight', { pixels: height });
+    });
+
     // show either the code or an editable textarea
     if (this.editable) {
       $container.html('<textarea class="code hljs"></textarea>');
+      heightObserver.observe($container.find('textarea')[0], { attributes: true, attributeFilter: ['style']});
     } else {
+      heightObserver.disconnect();
       $container.html(
         '<pre class="hljs"><code>' +
         code +
