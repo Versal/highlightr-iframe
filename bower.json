@@ -9,6 +9,7 @@
   "private": true,
   "dependencies": {
     "versal-player-api": "~0.3.3",
-    "versal-component-runtime": "~0.2.4"
+    "versal-component-runtime": "~0.2.4",
+    "highlightjs": "~8.0.0"
   }
 }

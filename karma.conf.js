@@ -9,7 +9,7 @@ module.exports = function(config) {
       'bower_components/versal-player-api/index.js',
       'lib/jquery-1.11.0.min.js',
       'lib/jquery.autosize.js',
-      'lib/highlight.pack.js',
+      'bower_components/highlightjs/highlight.pack.js',
       'lib/behave.js',
       'scripts/post_message_interface.js',
       'scripts/highlightr.js',
