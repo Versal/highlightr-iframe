@@ -4,113 +4,53 @@
   // wrapper for postMessage communication
   var player = new VersalPlayerAPI();
 
-  /**
-   * @constructor
-   * Gadget constructor
-   * @param options Used to set container DOM element
-   */
-  window.Highlightr = function() {
-    this.$el = $('<div class="hljs-container"></div>');
-    this.config = {};
-    this.editable = false; // a toggle-able state for the gadget
+  var highlightjsThemes = [
+    'arta',
+    'ascetic',
+    'atelier-dune dark',
+    'atelier-dune light',
+    'atelier-forest dark',
+    'atelier-forest light',
+    'atelier-heath dark',
+    'atelier-heath light',
+    'atelier-lakeside dark',
+    'atelier-lakeside light',
+    'atelier-seaside dark',
+    'atelier-seaside light',
+    'brown-paper',
+    'dark-style',
+    'default',
+    'docco',
+    'far',
+    'foundation',
+    'github',
+    'googlecode',
+    'idea',
+    'ir-black',
+    'magula',
+    'monokai',
+    'monokai-sublime',
+    'obsidian',
+    'paraiso dark',
+    'paraiso light',
+    'pojoaque',
+    'railscasts',
+    'rainbow',
+    'school-book',
+    'solarized dark',
+    'solarized light',
+    'sunburst',
+    'tomorrow-night-blue',
+    'tomorrow-blue-bright',
+    'tomorrow-night-eighties',
+    'tomorrow-night',
+    'tomorrow',
+    'vs',
+    'xcode',
+    'zenburn'
+  ];
 
-    /**
-     * add a bunch of theme options in the property sheet
-     * NOTE: the select will trigger attributeChanged if
-     * a different option is selected
-     */
-    player.sendMessage('setPropertySheetAttributes', {
-      theme: {
-        type: 'Select',
-        options: [
-          'arta',
-          'ascetic',
-          'atelier-dune dark',
-          'atelier-dune light',
-          'atelier-forest dark',
-          'atelier-forest light',
-          'atelier-heath dark',
-          'atelier-heath light',
-          'atelier-lakeside dark',
-          'atelier-lakeside light',
-          'atelier-seaside dark',
-          'atelier-seaside light',
-          'brown-paper',
-          'dark-style',
-          'default',
-          'docco',
-          'far',
-          'foundation',
-          'github',
-          'googlecode',
-          'idea',
-          'ir-black',
-          'magula',
-          'monokai',
-          'monokai-sublime',
-          'obsidian',
-          'paraiso dark',
-          'paraiso light',
-          'pojoaque',
-          'railscasts',
-          'rainbow',
-          'school-book',
-          'solarized dark',
-          'solarized light',
-          'sunburst',
-          'tomorrow-night-blue',
-          'tomorrow-blue-bright',
-          'tomorrow-night-eighties',
-          'tomorrow-night',
-          'tomorrow',
-          'vs',
-          'xcode',
-          'zenburn'
-        ]
-      }
-    });
-
-    this.createListeners();
-    this.createBehaveHooks();
-
-    player.startListening();
-    player.watchBodyHeight();
-  };
-
-  Highlightr.prototype.getEl = function() {
-    return this.$el[0];
-  };
-
-  // auto-size hook for Behave.js editor plugin
-  Highlightr.prototype.createBehaveHooks = function() {
-    BehaveHooks.add(['keydown'], function(data) {
-      var numLines = data.lines.total;
-      var fontSize = parseInt($(data.editor.element).css('font-size'), 10);
-      var padding = parseInt($(data.editor.element).css('padding'), 10);
-
-      $(data.editor.element).height((numLines * fontSize) + padding);
-    });
-  };
-
-  Highlightr.prototype.createListeners = function() {
-    player.on(
-      'attributesChanged',
-      function(config) {
-        this.config = config;
-        this.render();
-      }.bind(this)
-    );
-
-    player.on(
-      'editableChanged',
-      function(data) {
-        this.editable = data.editable;
-        this.render();
-      }.bind(this)
-    );
-  };
-
-  Highlightr.prototype.cssFiles = {
+  var highlightjsCssFiles = {
     'arta': 'arta.css',
     'ascetic': 'ascetic.css',
     'atelier-dune dark': 'atelier-dune.dark.css',
@@ -156,24 +96,86 @@
     'zenburn': 'zenburn.css',
   };
 
-  Highlightr.prototype.render = function() {
-    var themeFile = this.cssFiles[this.config.theme || 'default'];
+  /**
+   * @constructor
+   * Gadget constructor
+   * @param options Used to set container DOM element
+   */
+  window.Highlightr = function() {
+    this._$el = $('<div class="hljs-container"></div>');
+    this._config = {};
+    this._editable = false; // a toggle-able state for the gadget
+
+    /**
+     * add a bunch of theme options in the property sheet
+     * NOTE: the select will trigger attributeChanged if
+     * a different option is selected
+     */
+    player.sendMessage('setPropertySheetAttributes', {
+      theme: {
+        type: 'Select',
+        options: highlightjsThemes
+      }
+    });
+
+    this._createBehaveHooks();
+    this._createListeners();
+
+    player.startListening();
+    player.watchBodyHeight();
+  };
+
+  Highlightr.prototype.getEl = function() {
+    return this._$el[0];
+  };
+
+  // auto-size hook for Behave.js editor plugin
+  Highlightr.prototype._createBehaveHooks = function() {
+    BehaveHooks.add(['keydown'], function(data) {
+      var numLines = data.lines.total;
+      var fontSize = parseInt($(data.editor.element).css('font-size'), 10);
+      var padding = parseInt($(data.editor.element).css('padding'), 10);
+
+      $(data.editor.element).height((numLines * fontSize) + padding);
+    });
+  };
+
+  Highlightr.prototype._createListeners = function() {
+    player.on(
+      'attributesChanged',
+      function(config) {
+        this._config = config;
+        this._render();
+      }.bind(this)
+    );
+
+    player.on(
+      'editableChanged',
+      function(data) {
+        this._editable = data.editable;
+        this._render();
+      }.bind(this)
+    );
+  };
+
+  Highlightr.prototype._render = function() {
+    var themeFile = highlightjsCssFiles[this._config.theme || 'default'];
     document.getElementById('highlightStylesheet').href = 'bower_components/highlightjs/styles/' + themeFile;
 
-    if (this.editor) {
-      this.editor.destroy();
-      delete this.editor;
+    if (this._editor) {
+      this._editor.destroy();
+      delete this._editor;
     }
-    this.$el.empty();
+    this._$el.empty();
 
     // show either the code or an editable textarea
-    if (this.editable) {
+    if (this._editable) {
       var $textarea = $('<textarea class="code hljs"></textarea>');
-      this.$el.html($textarea);
-      $textarea.text(this.config.code || '');
+      this._$el.html($textarea);
+      $textarea.text(this._config.code || '');
       $textarea.autosize();
 
-      this.editor = new Behave({
+      this._editor = new Behave({
         textarea: $textarea[0],
         replaceTab: true,
         softTabs: true,
@@ -190,9 +192,9 @@
         player.setAttributes({ code: e.target.value });
       }.bind(this));
     } else {
-      this.$el.html(
+      this._$el.html(
         '<pre class="hljs"><code>' +
-        hljs.highlightAuto(this.config.code || '').value +
+        hljs.highlightAuto(this._config.code || '').value +
         '</code></pre>'
       );
     }

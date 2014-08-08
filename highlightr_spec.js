@@ -11,12 +11,14 @@
       var gadget = new Highlightr;
       document.body.appendChild(gadget.getEl());
 
+      // TODO: don't look at private variables, but at the HTML output instead
+
       it('not be editable initially', function() {
-        expect(gadget.editable).to.equal(false);
+        expect(gadget._editable).to.equal(false);
       });
 
       it('should have a config', function() {
-        expect(gadget.config).to.be.a('object');
+        expect(gadget._config).to.be.a('object');
       });
 
       it('should update the config', function(done) {
@@ -29,8 +31,8 @@
         }, '*');
 
         setTimeout(function() {
-          expect(gadget.config.theme).to.equal('default');
-          expect(gadget.config.code).to.equal('function() { var whoop; }');
+          expect(gadget._config.theme).to.equal('default');
+          expect(gadget._config.code).to.equal('function() { var whoop; }');
           expect($('pre.hljs').length).to.equal(1);
           done();
         }, 100);
