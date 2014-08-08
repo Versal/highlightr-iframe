@@ -9,8 +9,8 @@ module.exports = function(config) {
       'bower_components/jquery-autosize/jquery.autosize.js',
       'bower_components/highlightjs/highlight.pack.js',
       'bower_components/Behave.js/behave.js',
-      'scripts/highlightr.js',
-      'specs/highlightr_spec.js'
+      'highlightr.js',
+      'highlightr_spec.js'
     ],
     reporters: ['dots'],
     port: 9876,

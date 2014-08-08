@@ -2,9 +2,10 @@
 <html lang="en">
   <head>
     <meta charset="utf-8">
-    <link rel="stylesheet" href="styles/normalize.css">
+    <link rel="stylesheet" href="bower_components/normalize-css/normalize.css">
+    <link rel="stylesheet" href="bower_components/versal-gadget-theme/index.css">
     <link rel="stylesheet" id="highlightStylesheet" href="bower_components/highlightjs/styles/default.css">
-    <link rel="stylesheet" href="styles/gadget.css">
+    <link rel="stylesheet" href="highlightr.css">
   </head>
   <body>
 
@@ -17,6 +18,10 @@
     <script src="bower_components/versal-player-api/index.js"></script>
     <script src="bower_components/Behave.js/behave.js"></script>
 
-    <script src="scripts/highlightr.js"></script>
+    <script src="highlightr.js"></script>
+
+    <script>
+      document.body.appendChild((new Highlightr).getEl());
+    </script>
   </body>
 </html>
