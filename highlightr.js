@@ -9,12 +9,16 @@
    * Gadget constructor
    * @param options Used to set container DOM element
    */
-  window.Highlightr = function(options) {
-    this.$el = $(options.el);
+  window.Highlightr = function() {
+    this.$el = $('<div class="hljs-container"></div>');
     this.config = {};
 
     // a toggle-able state for the gadget
     this.editable = false;
+  };
+
+  Highlightr.prototype.getEl = function() {
+    return this.$el[0];
   };
 
   // auto-size hook for Behave.js editor plugin
@@ -167,7 +171,6 @@
   Highlightr.prototype.render = function() {
     // this generates the markup from the raw code input
     var code;
-    var $container;
 
     if (this.config.code) {
       code = hljs.highlightAuto(this.config.code).value;
@@ -175,21 +178,14 @@
       code = '';
     }
 
-    if (!this.$el.find('.hljs-container').length) {
-      this.$el.append('<div class="hljs-container"></div>');
-    } else {
-      this.$el.find('.hljs-container')[0].className = "hljs-container";
-    }
-
     var themeFile = this.cssFiles[this.config.theme || 'default'];
     document.getElementById('highlightStylesheet').href = 'bower_components/highlightjs/styles/' + themeFile;
 
-    $container = this.$el.find('.hljs-container');
     // show either the code or an editable textarea
     if (this.editable) {
-      $container.html('<textarea class="code hljs"></textarea>');
+      this.$el.html('<textarea class="code hljs"></textarea>');
     } else {
-      $container.html(
+      this.$el.html(
         '<pre class="hljs"><code>' +
         code +
         '</code></pre>'
@@ -223,10 +219,8 @@
     }
   };
 
-  var gadget = new Highlightr({
-    el: document.querySelector('body')
-  });
-
+  var gadget = new Highlightr;
   gadget.initialize();
+  document.body.appendChild(gadget.getEl());
 
 }());
