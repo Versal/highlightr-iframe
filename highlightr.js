@@ -159,7 +159,8 @@
     this.createListeners();
     this.createBehaveHooks();
 
-    player.sendMessage('startListening');
+    player.startListening();
+    player.watchBodyHeight();
     return this;
   };
 
@@ -183,18 +184,11 @@
     var themeFile = this.cssFiles[this.config.theme || 'default'];
     document.getElementById('highlightStylesheet').href = 'bower_components/highlightjs/styles/' + themeFile;
 
-    var heightObserver = new MutationObserver(function(mx){
-      var height = mx[0].target.offsetHeight;
-      player.sendMessage('setHeight', { pixels: height });
-    });
-
     $container = this.$el.find('.hljs-container');
     // show either the code or an editable textarea
     if (this.editable) {
       $container.html('<textarea class="code hljs"></textarea>');
-      heightObserver.observe($container.find('textarea')[0], { attributes: true, attributeFilter: ['style']});
     } else {
-      heightObserver.disconnect();
       $container.html(
         '<pre class="hljs"><code>' +
         code +
