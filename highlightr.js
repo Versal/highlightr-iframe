@@ -90,9 +90,16 @@
     return this._$el[0];
   };
 
-  Highlightr.prototype._render = function() {
+  Highlightr.prototype._updateCSS = function() {
     var themeFile = highlightjsCssFiles[this._config.theme || 'default'];
-    document.getElementById('highlightStylesheet').href = 'bower_components/highlightjs/styles/' + themeFile;
+    if (themeFile !== this._themeFile) {
+      document.getElementById('highlightStylesheet').href = 'bower_components/highlightjs/styles/' + themeFile;
+      this._themeFile = themeFile;
+    }
+  };
+
+  Highlightr.prototype._render = function() {
+    this._updateCSS();
 
     if (this._editor) {
       this._editor.destroy();
