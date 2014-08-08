@@ -11,12 +11,7 @@
    */
   window.Highlightr = function(options) {
     this.$el = $(options.el);
-
-    var config = options.config || {};
-    this.config = {
-      code: config.code || '',
-      theme: config.theme || 'default'
-    };
+    this.config = {};
 
     // a toggle-able state for the gadget
     this.editable = false;
@@ -36,11 +31,8 @@
   Highlightr.prototype.createListeners = function() {
     player.on(
       'attributesChanged',
-      function(data) {
-        for (var key in data) {
-          this.config[key] = data[key];
-        }
-
+      function(config) {
+        this.config = config;
         this.render();
         this.afterRender();
       }.bind(this)
@@ -178,7 +170,7 @@
     var code;
     var $container;
 
-    if (this.config.code !== '') {
+    if (this.config.code) {
       code = hljs.highlightAuto(this.config.code).value;
     } else {
       code = '';
@@ -190,7 +182,7 @@
       this.$el.find('.hljs-container')[0].className = "hljs-container";
     }
 
-    var themeFile = this.cssFiles[this.config.theme];
+    var themeFile = this.cssFiles[this.config.theme || 'default'];
     document.getElementById('highlightStylesheet').href = 'bower_components/highlightjs/styles/' + themeFile;
 
     var heightObserver = new MutationObserver(function(mx){
@@ -220,7 +212,7 @@
     var $textarea = this.$el.find('textarea');
     if ($textarea.length <= 0) return;
 
-    $textarea.text(this.config.code);
+    $textarea.text(this.config.code || '');
 
     this.editor = new Behave({
       textarea: $textarea[0],
@@ -247,11 +239,7 @@
   };
 
   var gadget = new Highlightr({
-    el: document.querySelector('body'),
-    config: {
-      code: 'function awesome() {}',
-      theme: 'default'
-    }
+    el: document.querySelector('body')
   });
 
   gadget.initialize();
