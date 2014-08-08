@@ -103,15 +103,8 @@
 
     player.on(
       'editableChanged',
-      function(editable) {
-        this.editable = editable;
-        if (!this.editable) {
-          if (this.editor !== undefined) {
-            this.editor.destroy();
-            delete this.editor;
-          }
-        }
-
+      function(data) {
+        this.editable = data.editable;
         this.render();
       }.bind(this)
     );
@@ -166,6 +159,12 @@
   Highlightr.prototype.render = function() {
     var themeFile = this.cssFiles[this.config.theme || 'default'];
     document.getElementById('highlightStylesheet').href = 'bower_components/highlightjs/styles/' + themeFile;
+
+    if (this.editor) {
+      this.editor.destroy();
+      delete this.editor;
+    }
+    this.$el.empty();
 
     // show either the code or an editable textarea
     if (this.editable) {
