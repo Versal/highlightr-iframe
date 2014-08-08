@@ -118,7 +118,6 @@
       }
     });
 
-    this._createBehaveHooks();
     this._createListeners();
 
     player.startListening();
@@ -127,17 +126,6 @@
 
   Highlightr.prototype.getEl = function() {
     return this._$el[0];
-  };
-
-  // auto-size hook for Behave.js editor plugin
-  Highlightr.prototype._createBehaveHooks = function() {
-    BehaveHooks.add(['keydown'], function(data) {
-      var numLines = data.lines.total;
-      var fontSize = parseInt($(data.editor.element).css('font-size'), 10);
-      var padding = parseInt($(data.editor.element).css('padding'), 10);
-
-      $(data.editor.element).height((numLines * fontSize) + padding);
-    });
   };
 
   Highlightr.prototype._createListeners = function() {
