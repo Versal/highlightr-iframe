@@ -4,52 +4,6 @@
   // wrapper for postMessage communication
   var player = new VersalPlayerAPI();
 
-  var highlightjsThemes = [
-    'arta',
-    'ascetic',
-    'atelier-dune dark',
-    'atelier-dune light',
-    'atelier-forest dark',
-    'atelier-forest light',
-    'atelier-heath dark',
-    'atelier-heath light',
-    'atelier-lakeside dark',
-    'atelier-lakeside light',
-    'atelier-seaside dark',
-    'atelier-seaside light',
-    'brown-paper',
-    'dark-style',
-    'default',
-    'docco',
-    'far',
-    'foundation',
-    'github',
-    'googlecode',
-    'idea',
-    'ir-black',
-    'magula',
-    'monokai',
-    'monokai-sublime',
-    'obsidian',
-    'paraiso dark',
-    'paraiso light',
-    'pojoaque',
-    'railscasts',
-    'rainbow',
-    'school-book',
-    'solarized dark',
-    'solarized light',
-    'sunburst',
-    'tomorrow-night-blue',
-    'tomorrow-blue-bright',
-    'tomorrow-night-eighties',
-    'tomorrow-night',
-    'tomorrow',
-    'vs',
-    'xcode',
-    'zenburn'
-  ];
-
   var highlightjsCssFiles = {
     'arta': 'arta.css',
     'ascetic': 'ascetic.css',
@@ -114,7 +68,7 @@
     player.setPropertySheetAttributes({
       theme: {
         type: 'Select',
-        options: highlightjsThemes
+        options: Object.keys(highlightjsCssFiles)
       }
     });
 
