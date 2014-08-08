@@ -8,13 +8,12 @@
     });
 
     it('should have a prototype', function() {
-      expect(exports).to.be.a('object');
-      expect(exports.Highlightr).to.be.a('function');
-      expect(exports.Highlightr.prototype.initialize).to.be.a('function');
+      expect(Highlightr).to.be.a('function');
+      expect(Highlightr.prototype.initialize).to.be.a('function');
     });
-    
+
     describe('Highlightr instance', function() {
-      var gadget = new exports.Highlightr({
+      var gadget = new Highlightr({
         el: document.body,
         config: { code: 'function awesome() {}' }
       });

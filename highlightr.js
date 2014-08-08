@@ -1,5 +1,3 @@
-var exports = exports || {};
-
 (function() {
   'use strict';
 
@@ -11,7 +9,7 @@ var exports = exports || {};
    * Gadget constructor
    * @param options Used to set container DOM element
    */
-  var Highlightr = function(options) {
+  window.Highlightr = function(options) {
     this.$el = $(options.el);
     if (options.config)
       this.config = options.config;
@@ -243,9 +241,6 @@ var exports = exports || {};
 
     return this;
   };
-
-  // make Highlightr available to specs
-  exports.Highlightr = Highlightr;
 
   var gadget = new Highlightr({
     el: document.querySelector('body'),
