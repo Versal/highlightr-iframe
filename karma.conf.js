@@ -3,15 +3,12 @@ module.exports = function(config) {
     frameworks: ['mocha', 'chai'],
     files: [
       'bower_components/versal-component-runtime/dist/runtime.min.js',
-      'lib/mocha.js',
-      'lib/chai.js',
       'bower_components/eventEmitter/EventEmitter.js',
       'bower_components/versal-player-api/index.js',
-      'lib/jquery-1.11.0.min.js',
-      'lib/jquery.autosize.js',
+      'bower_components/jquery/dist/jquery.js',
+      'bower_components/jquery-autosize/jquery.autosize.js',
       'bower_components/highlightjs/highlight.pack.js',
-      'lib/behave.js',
-      'scripts/post_message_interface.js',
+      'bower_components/Behave.js/behave.js',
       'scripts/highlightr.js',
       'specs/highlightr_spec.js'
     ],
