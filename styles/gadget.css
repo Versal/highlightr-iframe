@@ -12,6 +12,10 @@
   line-height: 1.1em;
 }
 
+.hljs {
+  margin: 0;
+}
+
 textarea {
   line-height: 1.2em;
 }

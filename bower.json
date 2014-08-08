@@ -12,7 +12,8 @@
     "versal-component-runtime": "~0.2.4",
     "highlightjs": "~8.0.0",
     "jquery-autosize": "~1.18.9",
-    "Behave.js": "jakiestfu/Behave.js"
+    "Behave.js": "jakiestfu/Behave.js",
+    "versal-gadget-theme": "~0.3.0"
   },
   "devDependencies": {
     "jquery": "~2.1.1"
