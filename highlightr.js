@@ -118,7 +118,15 @@
       }
     });
 
-    this._createListeners();
+    player.on('attributesChanged', (function(config) {
+        this._config = config;
+        this._render();
+    }).bind(this));
+
+    player.on('editableChanged', (function(data) {
+        this._editable = data.editable;
+        this._render();
+    }).bind(this));
 
     player.startListening();
     player.watchBodyHeight();
@@ -126,24 +134,6 @@
 
   Highlightr.prototype.getEl = function() {
     return this._$el[0];
-  };
-
-  Highlightr.prototype._createListeners = function() {
-    player.on(
-      'attributesChanged',
-      function(config) {
-        this._config = config;
-        this._render();
-      }.bind(this)
-    );
-
-    player.on(
-      'editableChanged',
-      function(data) {
-        this._editable = data.editable;
-        this._render();
-      }.bind(this)
-    );
   };
 
   Highlightr.prototype._render = function() {
