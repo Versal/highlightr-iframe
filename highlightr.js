@@ -187,10 +187,12 @@
         fence: false
       });
 
-      // on blur of textarea, save contents to config
+      $textarea.on('keyup', function(e) {
+        $textarea.trigger('autosize.resize');
+      });
       $textarea.on('blur', function(e) {
         player.setAttributes({ code: e.target.value });
-      }.bind(this));
+      });
     } else {
       this._$el.html(
         '<pre class="hljs"><code>' +

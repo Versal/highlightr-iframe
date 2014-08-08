@@ -1,6 +1,7 @@
 /* textarea */
 .code {
   width: 100%;
+  box-sizing: border-box;
 }
 
 .code,
@@ -18,4 +19,5 @@
 
 textarea {
   line-height: 1.2em;
+  resize: none !important;
 }
