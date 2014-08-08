@@ -3,7 +3,3 @@
 To run: `bower install`, `versal preview`.
 
 To test: `npm install`, `npm test`.
-
-Source stylus is in `src/styles`.
-
-All other pertinent files are in `assets/`.
