@@ -197,9 +197,7 @@
 
       // on blur of textarea, save contents to config
       $textarea.on('blur', function(e) {
-        player.sendMessage('setAttributes', {
-          code: e.target.value
-        });
+        player.setAttributes({ code: e.target.value });
       }.bind(this));
     } else {
       this.$el.html(
