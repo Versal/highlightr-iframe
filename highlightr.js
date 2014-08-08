@@ -107,11 +107,11 @@
     this._editable = false; // a toggle-able state for the gadget
 
     /**
-     * add a bunch of theme options in the property sheet
+     * Add a bunch of theme options in the property sheet
      * NOTE: the select will trigger attributeChanged if
      * a different option is selected
      */
-    player.sendMessage('setPropertySheetAttributes', {
+    player.setPropertySheetAttributes({
       theme: {
         type: 'Select',
         options: highlightjsThemes
