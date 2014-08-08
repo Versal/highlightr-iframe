@@ -39,10 +39,10 @@
     );
 
     player.on(
-      'setEditable',
-      function(data) {
-        this.editable = data.editable;
-        if (!data.editable) {
+      'editableChanged',
+      function(editable) {
+        this.editable = editable;
+        if (!this.editable) {
           if (this.editor !== undefined) {
             this.editor.destroy();
             delete this.editor;
