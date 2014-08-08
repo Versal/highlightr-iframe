@@ -41,7 +41,7 @@
     'solarized light': 'solarized_light.css',
     'sunburst': 'sunburst.css',
     'tomorrow-night-blue': 'tomorrow-night-blue.css',
-    'tomorrow-blue-bright': 'tomorrow-blue-bright.css',
+    'tomorrow-night-bright': 'tomorrow-night-bright.css',
     'tomorrow-night-eighties': 'tomorrow-night-eighties.css',
     'tomorrow-night': 'tomorrow-night.css',
     'tomorrow': 'tomorrow.css',
