@@ -214,7 +214,4 @@
     }
   };
 
-  var gadget = new Highlightr;
-  document.body.appendChild(gadget.getEl());
-
 }());
