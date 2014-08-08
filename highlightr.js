@@ -164,15 +164,6 @@
   };
 
   Highlightr.prototype.render = function() {
-    // this generates the markup from the raw code input
-    var code;
-
-    if (this.config.code) {
-      code = hljs.highlightAuto(this.config.code).value;
-    } else {
-      code = '';
-    }
-
     var themeFile = this.cssFiles[this.config.theme || 'default'];
     document.getElementById('highlightStylesheet').href = 'bower_components/highlightjs/styles/' + themeFile;
 
@@ -202,7 +193,7 @@
     } else {
       this.$el.html(
         '<pre class="hljs"><code>' +
-        code +
+        hljs.highlightAuto(this.config.code || '').value +
         '</code></pre>'
       );
     }
