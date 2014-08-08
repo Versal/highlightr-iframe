@@ -34,8 +34,6 @@
             }
         }, '*');
 
-        window.postMessage({ event: 'attached' }, '*');
-
         this.timeout(500);
 
         setTimeout(function() {

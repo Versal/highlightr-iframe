@@ -45,14 +45,6 @@ var exports = exports || {};
     );
 
     player.on(
-      'attached',
-      function() {
-        this.render();
-        this.afterRender();
-      }.bind(this)
-    );
-
-    player.on(
       'setEditable',
       function(data) {
         this.editable = data.editable;
