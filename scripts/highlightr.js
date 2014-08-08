@@ -218,7 +218,7 @@ var exports = exports || {};
     var $textarea = this.$el.find('textarea');
     if ($textarea.length <= 0) return;
 
-    $textarea.html(this.config.code);
+    $textarea.text(this.config.code);
 
     this.editor = new Behave({
       textarea: $textarea[0],
