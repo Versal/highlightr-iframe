@@ -1,0 +1,14 @@
+{
+  "name": "highlightr-iframe",
+  "version": "0.0.0",
+  "homepage": "https://github.com/Versal/highlightr-iframe",
+  "authors": [
+    "Versal Team"
+  ],
+  "license": "MIT",
+  "private": true,
+  "dependencies": {
+    "versal-player-api": "~0.3.3",
+    "versal-component-runtime": "~0.2.4"
+  }
+}

@@ -1,7 +1,9 @@
 Highlightr
 =========
 
-To run: ```npm install```, ```grunt```, ```versal preview```.
+To run: ```bower install```, ```npm install```, ```grunt```, ```versal preview```.
+
+To test: ```npm test```
 
 Source stylus is in ```src/styles```.
 
