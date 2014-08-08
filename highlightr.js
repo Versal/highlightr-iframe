@@ -34,7 +34,6 @@
       function(config) {
         this.config = config;
         this.render();
-        this.afterRender();
       }.bind(this)
     );
 
@@ -50,7 +49,6 @@
         }
 
         this.render();
-        this.afterRender();
       }.bind(this)
     );
   };
@@ -204,38 +202,31 @@
       );
     }
 
-    return this;
-  };
-
-  // Behave.js needs certain elements rendered before it can be initialized
-  Highlightr.prototype.afterRender = function() {
     var $textarea = this.$el.find('textarea');
-    if ($textarea.length <= 0) return;
+    if ($textarea.length > 0) {
+      $textarea.text(this.config.code || '');
 
-    $textarea.text(this.config.code || '');
-
-    this.editor = new Behave({
-      textarea: $textarea[0],
-      replaceTab: true,
-      softTabs: true,
-      tabSize: 2,
-      autoOpen: true,
-      overwrite: true,
-      autoStrip: true,
-      autoIndent: true,
-      fence: false
-    });
-
-    $textarea.autosize();
-
-    // on blur of textarea, save contents to config
-    $textarea.on('blur', function(e) {
-      player.sendMessage('setAttributes', {
-        code: e.target.value
+      this.editor = new Behave({
+        textarea: $textarea[0],
+        replaceTab: true,
+        softTabs: true,
+        tabSize: 2,
+        autoOpen: true,
+        overwrite: true,
+        autoStrip: true,
+        autoIndent: true,
+        fence: false
       });
-    }.bind(this));
 
-    return this;
+      $textarea.autosize();
+
+      // on blur of textarea, save contents to config
+      $textarea.on('blur', function(e) {
+        player.sendMessage('setAttributes', {
+          code: e.target.value
+        });
+      }.bind(this));
+    }
   };
 
   var gadget = new Highlightr({
