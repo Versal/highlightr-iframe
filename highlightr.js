@@ -11,8 +11,12 @@
    */
   window.Highlightr = function(options) {
     this.$el = $(options.el);
-    if (options.config)
-      this.config = options.config;
+
+    var config = options.config || {};
+    this.config = {
+      code: config.code || '',
+      theme: config.theme || 'default'
+    };
 
     // a toggle-able state for the gadget
     this.editable = false;
