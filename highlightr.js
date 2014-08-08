@@ -178,18 +178,10 @@
 
     // show either the code or an editable textarea
     if (this.editable) {
-      this.$el.html('<textarea class="code hljs"></textarea>');
-    } else {
-      this.$el.html(
-        '<pre class="hljs"><code>' +
-        code +
-        '</code></pre>'
-      );
-    }
-
-    var $textarea = this.$el.find('textarea');
-    if ($textarea.length > 0) {
+      var $textarea = $('<textarea class="code hljs"></textarea>');
+      this.$el.html($textarea);
       $textarea.text(this.config.code || '');
+      $textarea.autosize();
 
       this.editor = new Behave({
         textarea: $textarea[0],
@@ -203,14 +195,18 @@
         fence: false
       });
 
-      $textarea.autosize();
-
       // on blur of textarea, save contents to config
       $textarea.on('blur', function(e) {
         player.sendMessage('setAttributes', {
           code: e.target.value
         });
       }.bind(this));
+    } else {
+      this.$el.html(
+        '<pre class="hljs"><code>' +
+        code +
+        '</code></pre>'
+      );
     }
   };
 
