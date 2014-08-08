@@ -2,6 +2,11 @@
   'use strict';
 
   describe('Highlightr prototype', function() {
+
+    before(function() {
+      $(document.body).append('<link rel="stylesheet" id="highlightStylesheet">');
+    });
+
     it('should have a prototype', function() {
       expect(exports).to.be.a('object');
       expect(exports.Highlightr).to.be.a('function');

@@ -60,6 +60,52 @@ var exports = exports || {};
     );
   };
 
+  Highlightr.prototype.cssFiles = {
+    'arta': 'arta.css',
+    'ascetic': 'ascetic.css',
+    'atelier-dune dark': 'atelier-dune.dark.css',
+    'atelier-dune light': 'atelier-dune.light.css',
+    'atelier-forest dark': 'atelier-forest.dark.css',
+    'atelier-forest light': 'atelier-forest.light.css',
+    'atelier-heath dark': 'atelier-heath.dark.css',
+    'atelier-heath light': 'atelier-heath.light.css',
+    'atelier-lakeside dark': 'atelier-lakeside.dark.css',
+    'atelier-lakeside light': 'atelier-lakeside.light.css',
+    'atelier-seaside dark': 'atelier-seaside.dark.css',
+    'atelier-seaside light': 'atelier-seaside.light.css',
+    'brown-paper': 'brown_paper.css',
+    'dark-style': 'dark.css',
+    'default': 'default.css',
+    'docco': 'docco.css',
+    'far': 'far.css',
+    'foundation': 'foundation.css',
+    'github': 'github.css',
+    'googlecode': 'googlecode.css',
+    'idea': 'idea.css',
+    'ir-black': 'ir_black.css',
+    'magula': 'magula.css',
+    'monokai': 'monokai.css',
+    'monokai-sublime': 'monokai-sublime.css',
+    'obsidian': 'obsidian.css',
+    'paraiso dark': 'paraiso_dark.css',
+    'paraiso light': 'paraiso_light.css',
+    'pojoaque': 'pojoaque.css',
+    'railscasts': 'railscasts.css',
+    'rainbow': 'rainbow.css',
+    'school-book': 'school_book.css',
+    'solarized dark': 'solarized_dark.css',
+    'solarized light': 'solarized_light.css',
+    'sunburst': 'sunburst.css',
+    'tomorrow-night-blue': 'tomorrow-night-blue.css',
+    'tomorrow-blue-bright': 'tomorrow-blue-bright.css',
+    'tomorrow-night-eighties': 'tomorrow-night-eighties.css',
+    'tomorrow-night': 'tomorrow-night.css',
+    'tomorrow': 'tomorrow.css',
+    'vs': 'vs.css',
+    'xcode': 'xcode.css',
+    'zenburn': 'zenburn.css',
+  };
+
   Highlightr.prototype.initialize = function() {
     /**
      * add a bunch of theme options in the property sheet
@@ -141,14 +187,15 @@ var exports = exports || {};
       this.$el.find('.hljs-container')[0].className = "hljs-container";
     }
 
-    $container = this.$el.find('.hljs-container');
-    $container.addClass(this.config.theme);
+    var themeFile = this.cssFiles[this.config.theme];
+    document.getElementById('highlightStylesheet').href = 'bower_components/highlightjs/styles/' + themeFile;
 
     var heightObserver = new MutationObserver(function(mx){
       var height = mx[0].target.offsetHeight;
       player.sendMessage('setHeight', { pixels: height });
     });
 
+    $container = this.$el.find('.hljs-container');
     // show either the code or an editable textarea
     if (this.editable) {
       $container.html('<textarea class="code hljs"></textarea>');
