@@ -51,6 +51,7 @@ var exports = exports || {};
         if (!data.editable) {
           if (this.editor !== undefined) {
             this.editor.destroy();
+            delete this.editor;
           }
         }
 
@@ -215,8 +216,9 @@ var exports = exports || {};
   // Behave.js needs certain elements rendered before it can be initialized
   Highlightr.prototype.afterRender = function() {
     var $textarea = this.$el.find('textarea');
+    if ($textarea.length <= 0) return;
 
-    $textarea.html(this.config.code);
+    $textarea.text(this.config.code);
 
     this.editor = new Behave({
       textarea: $textarea[0],
