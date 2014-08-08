@@ -1,17 +1,12 @@
 {
   "name": "highlightr",
   "version": "0.0.1",
-  "dependencies": {
-  },
   "scripts": {
     "test": "karma start --browsers Firefox --single-run"
   },
+  "dependencies": {
+  },
   "devDependencies": {
-    "grunt": "^0.4.4",
-    "grunt-contrib-watch": "^0.6.1",
-    "grunt-contrib-stylus": "^0.13.2",
-    "nib": "^1.0.2",
-    "grunt-mocha": "^0.4.10",
     "chai": "*",
     "karma": "*",
     "karma-chai": "*",
