@@ -12,9 +12,69 @@
   window.Highlightr = function() {
     this.$el = $('<div class="hljs-container"></div>');
     this.config = {};
+    this.editable = false; // a toggle-able state for the gadget
 
-    // a toggle-able state for the gadget
-    this.editable = false;
+    /**
+     * add a bunch of theme options in the property sheet
+     * NOTE: the select will trigger attributeChanged if
+     * a different option is selected
+     */
+    player.sendMessage('setPropertySheetAttributes', {
+      theme: {
+        type: 'Select',
+        options: [
+          'arta',
+          'ascetic',
+          'atelier-dune dark',
+          'atelier-dune light',
+          'atelier-forest dark',
+          'atelier-forest light',
+          'atelier-heath dark',
+          'atelier-heath light',
+          'atelier-lakeside dark',
+          'atelier-lakeside light',
+          'atelier-seaside dark',
+          'atelier-seaside light',
+          'brown-paper',
+          'dark-style',
+          'default',
+          'docco',
+          'far',
+          'foundation',
+          'github',
+          'googlecode',
+          'idea',
+          'ir-black',
+          'magula',
+          'monokai',
+          'monokai-sublime',
+          'obsidian',
+          'paraiso dark',
+          'paraiso light',
+          'pojoaque',
+          'railscasts',
+          'rainbow',
+          'school-book',
+          'solarized dark',
+          'solarized light',
+          'sunburst',
+          'tomorrow-night-blue',
+          'tomorrow-blue-bright',
+          'tomorrow-night-eighties',
+          'tomorrow-night',
+          'tomorrow',
+          'vs',
+          'xcode',
+          'zenburn'
+        ]
+      }
+    });
+
+    this.createListeners();
+    this.createBehaveHooks();
+
+    player.startListening();
+    player.watchBodyHeight();
   };
 
   Highlightr.prototype.getEl = function() {
@@ -103,71 +163,6 @@
     'zenburn': 'zenburn.css',
   };
 
-  Highlightr.prototype.initialize = function() {
-    /**
-     * add a bunch of theme options in the property sheet
-     * NOTE: the select will trigger attributeChanged if
-     * a different option is selected
-     */
-    player.sendMessage('setPropertySheetAttributes', {
-      theme: {
-        type: 'Select',
-        options: [
-          'arta',
-          'ascetic',
-          'atelier-dune dark',
-          'atelier-dune light',
-          'atelier-forest dark',
-          'atelier-forest light',
-          'atelier-heath dark',
-          'atelier-heath light',
-          'atelier-lakeside dark',
-          'atelier-lakeside light',
-          'atelier-seaside dark',
-          'atelier-seaside light',
-          'brown-paper',
-          'dark-style',
-          'default',
-          'docco',
-          'far',
-          'foundation',
-          'github',
-          'googlecode',
-          'idea',
-          'ir-black',
-          'magula',
-          'monokai',
-          'monokai-sublime',
-          'obsidian',
-          'paraiso dark',
-          'paraiso light',
-          'pojoaque',
-          'railscasts',
-          'rainbow',
-          'school-book',
-          'solarized dark',
-          'solarized light',
-          'sunburst',
-          'tomorrow-night-blue',
-          'tomorrow-blue-bright',
-          'tomorrow-night-eighties',
-          'tomorrow-night',
-          'tomorrow',
-          'vs',
-          'xcode',
-          'zenburn'
-        ]
-      }
-    });
-
-    this.createListeners();
-    this.createBehaveHooks();
-
-    player.startListening();
-    player.watchBodyHeight();
-    return this;
-  };
-
   Highlightr.prototype.render = function() {
     // this generates the markup from the raw code input
     var code;
@@ -220,7 +215,6 @@
   };
 
   var gadget = new Highlightr;
-  gadget.initialize();
   document.body.appendChild(gadget.getEl());
 
 }());
