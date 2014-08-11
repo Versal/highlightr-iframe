@@ -1,9 +1,9 @@
 {
   "username": "ryjo",
-  "name": "highlightr-iframe",
-  "version": "0.0.1",
-  "title": "Highlightr Iframe",
-  "description": "Iframe launcher-compatible syntax highlighter",
+  "name": "Highlightr",
+  "version": "0.1.0",
+  "title": "Highlightr",
+  "description": "Highlight code",
   "author": "Ryan Jones",
   "launcher": "iframe",
   "defaultConfig": {
