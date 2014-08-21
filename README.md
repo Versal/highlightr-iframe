@@ -1,9 +1,21 @@
 # Highlightr [![Build Status](https://travis-ci.org/Versal/highlightr-iframe.svg?branch=master)](https://travis-ci.org/Versal/highlightr-iframe)
 
-To run: `bower install`, `versal preview`.
+## Basic functions
+- Authors can embed a code snippet and pick a theme for syntax highlighting.
+- Learners can view the code snippet.
 
-To test: `npm install`, `npm test`.
+## To run:
+```
+  bower install
+  versal preview
+```
 
-# Changelog
+## To test:
+```
+  npm install
+  npm test
+```
+
+## Changelog
 - **0.1.1** Add `versal.html`
 - **0.1.0** First stable version deployed to production (replaced older gadget that used the versal-legacy-launcher)
