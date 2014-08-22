@@ -53,7 +53,6 @@
   /**
    * @constructor
    * Gadget constructor
-   * @param options Used to set container DOM element
    */
   window.Highlightr = function() {
     this._$el = $('<div class="hljs-container"></div>');
