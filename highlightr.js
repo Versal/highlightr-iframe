@@ -50,6 +50,11 @@
     'zenburn': 'zenburn.css',
   };
 
+  var defaultAttributes = {
+    code: 'function awesome() {}',
+    theme: 'default'
+  };
+
   /**
    * @constructor
    * Gadget constructor
@@ -72,6 +77,11 @@
     });
 
     player.on('attributesChanged', (function(config) {
+      // establish default configuration
+      if (!config.code || !config.theme) {
+        player.setAttributes(defaultAttributes);
+        return;
+      }
       this._config = config;
       this._render();
     }).bind(this));
