@@ -72,13 +72,13 @@
     });
 
     player.on('attributesChanged', (function(config) {
-        this._config = config;
-        this._render();
+      this._config = config;
+      this._render();
     }).bind(this));
 
     player.on('editableChanged', (function(data) {
-        this._editable = data.editable;
-        this._render();
+      this._editable = data.editable;
+      this._render();
     }).bind(this));
 
     player.startListening();
