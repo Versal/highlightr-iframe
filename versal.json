@@ -5,9 +5,5 @@
   "title": "Highlightr",
   "description": "Highlight code",
   "author": "Ryan Jones",
-  "launcher": "iframe",
-  "defaultConfig": {
-    "code": "function awesome() {}",
-    "theme": "default"
-  }
+  "launcher": "iframe"
 }
