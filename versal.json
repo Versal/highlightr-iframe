@@ -6,6 +6,7 @@
   "description": "Highlight code",
   "author": "Ryan Jones",
   "launcher": "iframe",
+  "exampleUrl": "https://versal.com/c/piovee/learn",
   "defaultConfig": {
     "code": "function awesome() {}",
     "theme": "default"
