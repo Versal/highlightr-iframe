@@ -2,7 +2,9 @@
   "name": "highlightr",
   "version": "0.0.1",
   "scripts": {
-    "test": "karma start --browsers Firefox --single-run"
+    "test": "karma start --browsers Firefox --single-run",
+    "build": "bower install",
+    "upload": "versal upload"
   },
   "dependencies": {
   },
